@@ -10,7 +10,7 @@ CREATE TABLE Zabytek(
 Nazwa char(50) CHECK(LEN(Nazwa) >= 5) PRIMARY KEY,
 Stan char(30),
 JednostkaOrganizacyjna char(50),
-Adres int UNIQUE FOREIGN KEY REFERENCES Adres(IdAdresu)
+Adres int UNIQUE FOREIGN KEY REFERENCES Adres(IdAdresu) ON DELETE SET NULL
  );
 
 
@@ -22,7 +22,7 @@ PrzewidywanaDataZakonczenia  date CHECK( PrzewidywanaDataZakonczenia >= '2000-01
 DataRozpoczeciaPrac date CHECK(DataRozpoczeciaPrac >= '2000-01-01'),
 PrzewidywanaKwotaDoWydania float CHECK(PrzewidywanaKwotaDoWydania >= 0.0),
 
-Zabytek char(50) Foreign KEY REFERENCES Zabytek(Nazwa)
+Zabytek char(50) Foreign KEY REFERENCES Zabytek(Nazwa) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Firma(
@@ -40,8 +40,8 @@ OsobaZarzadzajaca char(50),
 CzyZatwierdzony BIT,
 Data date,
 
-IdKonserwacji int Foreign KEY REFERENCES Konserwacja(IdKonserwacji),
-NIP char(13) Foreign KEY REFERENCES Firma(NIP)
+IdKonserwacji int Foreign KEY REFERENCES Konserwacja(IdKonserwacji) ON DELETE SET NULL,
+NIP char(13) Foreign KEY REFERENCES Firma(NIP) ON UPDAtE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Konserwator(
@@ -49,7 +49,7 @@ NrPracownika char(20) PRIMARY KEY,
 Imie char(30),
 Nazwisko char(30) UNIQUE NOT NULL,
 
-NIP char(13) Foreign KEY REFERENCES Firma(NIP)
+NIP char(13) Foreign KEY REFERENCES Firma(NIP) ON UPDAtE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Kontrola(
@@ -58,8 +58,8 @@ Data date CHECK( Data >= '2000-01-01'),
 CzyZalecanaKontrola BIT,
 Opis char(2048) CHECK(LEN(Opis) >= 4),
 
-Zabytek char(50) Foreign KEY REFERENCES Zabytek(Nazwa),
-NIP char(13) Foreign KEY REFERENCES Firma(NIP)
+Zabytek char(50) Foreign KEY REFERENCES Zabytek(Nazwa) ON UPDAtE CASCADE ON DELETE SET NULL,
+NIP char(13) Foreign KEY REFERENCES Firma(NIP) ON UPDAtE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE PrzetargNaMaterialy(
@@ -69,7 +69,7 @@ CzyZatwierdzony BIT,
 KwotaDoWydania float CHECK(KwotaDoWydania >= 0.0),
 Data date CHECK( Data >= '2000-01-01'),
 
-IdPrzetargu int Foreign KEY REFERENCES Przetarg(IdPRzetargu)
+IdPrzetargu int Foreign KEY REFERENCES Przetarg(IdPRzetargu) ON DELETE SET NULL
 );
 
 CREATE TABLE TypMaterialu(
@@ -83,7 +83,7 @@ Cena float CHECK(Cena >= 0.0),
 Ilosc float CHECK(Ilosc > 0.0),
 
 IdPrzetarguNaMaterialy int Foreign key references PrzetargNaMaterialy(IdPrzetarguNaMaterialy),
-TypMaterialu char(60) Foreign key references TypMaterialu(Nazwa)
+TypMaterialu char(60) Foreign key references TypMaterialu(Nazwa) ON UPDAtE CASCADE ON DELETE SET NULL
 );
 
 

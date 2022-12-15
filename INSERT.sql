@@ -16,12 +16,11 @@ Values ('Zamek Krzyzacki', 'w uzyciu', 'Urzad Miasta Bytow', 1),
 		('Kosciol sw Genowefy', 'w uzyciu', 'Diecezja w Pelpinie', 3),
 		('Cerkiew sw Jerzego', 'w uzyciu', 'Urzad Miasta Bytow', 4),
 		('Ruiny starego kosciola sw Katarzyny', 'do remontu', 'Urzad Miasta Bytow', 5),
-		('Stary most kolejowy', 'w uzyciu', 'Urzad Miasta Bytow', 5),
-		('Zabytkowe kamiennice na Sikorskiego', 'w uzyciu','Urzad Miasta Bytow', 6),
-		('Stary cmentarz zydowski', 'w uzyciu', 'Urzad Miasta Bytow', 7),
-		('Stary cmentarz niemiecki', 'w uzyciu','Urzad Miasta Bytow', 8),
-		('Zabytkowe kamiennice na Mickiewicza', 'w uzyciu', 'Urzad Miasta Bytow', 9),
-		('Stara lesniczowka', 'w uzyciu', 'Urzad Miasta Bytow', 10);
+		('Stary most kolejowy', 'w uzyciu', 'Urzad Miasta Bytow', 6),
+		('Zabytkowe kamiennice na Sikorskiego', 'w uzyciu','Urzad Miasta Bytow', 7),
+		('Stary cmentarz zydowski', 'w uzyciu', 'Urzad Miasta Bytow', 8),
+		('Stary cmentarz niemiecki', 'w uzyciu','Urzad Miasta Bytow', 9),
+		('Zabytkowe kamiennice na Mickiewicza', 'w uzyciu', 'Urzad Miasta Bytow', 10);
 
 	
 INSERT INTO Konserwacja
