@@ -19,3 +19,18 @@ WHERE Kontrola.CzyZalecanaKontrola = 1
 
 GROUP BY Zabytek.Nazwa ORDER BY DataKonserwacji, DataKontroli
 
+--3 mati
+SELECT Material.TypMaterialu, SUM(Material.ilosc) as iloscMaterialow, AVG(Material.cena) as sredniaCena FROM Material
+INNER JOIN PrzetargNaMaterialy
+ON Material.IdPrzetarguNaMaterialy = PrzetargNaMaterialy.IdPrzetarguNaMaterialy
+INNER JOIN Przetarg
+ON PrzetargNaMaterialy.IdPrzetargu = Przetarg.IdPrzetargu
+INNER JOIN Konserwacja
+ON Przetarg.idkonserwacji = Konserwacja.IdKonserwacji
+INNER JOIN Zabytek
+ON Konserwacja.Zabytek = Zabytek.Nazwa
+INNER JOIN Adres
+ON Zabytek.Adres = Adres.idadresu
+WHERE Adres.Miasto ='Bytow' -- tutaj mozna zmienic na gda
+
+GROUP BY Material.TypMaterialu
