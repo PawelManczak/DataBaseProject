@@ -34,3 +34,12 @@ ON Zabytek.Adres = Adres.idadresu
 WHERE Adres.Miasto ='Bytow' -- tutaj mozna zmienic na gda
 
 GROUP BY Material.TypMaterialu
+
+-- 1 Michal
+SELECT Zabytek.nazwa, Adres.Ulica, Adres.NumerBudynku, Adres.miasto, Kontrola.data, Kontrola.Opis
+FROM Kontrola
+INNER JOIN Zabytek
+ON Zabytek.nazwa = Kontrola.Zabytek
+INNER JOIN Adres
+ON Adres.idadresu = Zabytek.Adres
+WHERE Kontrola.NIP = '987654355123' -- <-- tutaj mozna zmienic nip
