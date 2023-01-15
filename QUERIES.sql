@@ -43,3 +43,20 @@ ON Zabytek.nazwa = Kontrola.Zabytek
 INNER JOIN Adres
 ON Adres.idadresu = Zabytek.Adres
 WHERE Kontrola.NIP = '987654355123' -- <-- tutaj mozna zmienic nip
+
+-- 2 Michal
+
+SELECT AVG(Material.cena)as srednia, Material.TypMaterialu
+INTo #temp
+FROM Material
+GROUP by Material.TypMaterialu
+
+SELECT * FROM #temp
+
+SELECT Material.TypMaterialu, Material.cena as wydanaKwota, PrzetargNaMaterialy.OsobaOdpowiedzialna, #temp.srednia AS SredniaCena
+FROM Material
+INNER JOIN PrzetargNaMaterialy
+ON PrzetargNaMaterialy.idprzetargunamaterialy = Material.idprzetargunamaterialy
+INNER JOIN #temp
+ON #temp.typmaterialu = Material.TypMaterialu
+WHERE Material.cena > 2.0 * #temp.srednia
