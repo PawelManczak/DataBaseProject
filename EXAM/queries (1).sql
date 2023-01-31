@@ -35,4 +35,40 @@ WHERE TNO not IN
   WHERE Teachers.Tno = TSC.Tno
   and Courses.Cno = TSC.cno
   and Courses.Studyear = 1
-  )
+ )
+ 
+ --6
+ SELECT TOP 1 Courses.Studyear, COUNT(*)
+ FROM Courses
+ GROUP BY Courses.Studyear
+ ORDER BY  COUNT(*) ASC 
+ 
+ --7
+ SELECT TOP 1 Students.Syear, AVG(TSC.Grade)
+ FROM Students, TSC
+ WHERE Students.Sno = TSC.Sno
+ GROUP BY Students.Syear
+ ORDER BY AVG(TSC.Grade) desc
+
+--8
+SELECT COUNT(*)
+FROM Teachers
+WHERe Teachers.Tno not in
+(
+	SELECT Teachers.Tno
+  	FROM Teachers, TSC
+  	WHERE Teachers.tno = TSC.tno
+)
+
+--9
+SELECT Courses.studyear, SUM(TSC.Hours) 
+FROM Courses, TSC
+WHERE Courses.Cno = TSC.Cno
+GROUP BY Courses.Studyear
+
+--10
+SELECT TOP 1 Students.Sno, AVG(TSC.grade)
+FROM Students, TSC
+WHERE Students.Sno = TSC.Sno
+GROUP BY Students.sno
+ORDER BY AVG(TSC.Grade) DESC
