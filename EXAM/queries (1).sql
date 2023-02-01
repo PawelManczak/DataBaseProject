@@ -72,3 +72,45 @@ FROM Students, TSC
 WHERE Students.Sno = TSC.Sno
 GROUP BY Students.sno
 ORDER BY AVG(TSC.Grade) DESC
+
+--11
+SELECT Students.Sno, Students.Sname , AVG(TSC.grade)
+FROM Students, TSC
+WHERE Students.Sno = TSC.Sno
+GROUP BY Students.sno, Students.Sname 
+ORDER BY AVG(TSC.Grade) DESC
+
+--13
+SELECT Teachers.tno
+FROM Teachers
+WHERE Teachers.supno is null
+
+--14
+SELECT Teachers.Tname, Teachers.Tno, Teachers.Title, count(TSC.TNO)
+FROM Teachers, TSC
+WHERE Teachers.Tno = TSC.tno
+GROUP BY Teachers.Tname, Teachers.Tno, Teachers.title
+having count(TSC.TNO) > 3.0
+
+--15
+SELECT Students.Sno, Students.Sname
+FROM Students
+INNER JOIN TSC on TSC.Sno = Students.sno
+WHERE TSC.Grade = 5.0
+GROUP BY Students.Sno, Students.Sname
+
+--16
+SELECT TSC.sno, Students.Sname
+FROM Students, TSC
+WHERE TSC.sno = Students.Sno
+and tsc.Grade = (
+	select MAX(grade)
+ 	 FROM TSC
+)
+
+--17 
+Select Count(distinct Students.Sno)
+FROM Students
+inner join tsc on tsc.Sno = Students.Sno
+inner join Courses on Courses.Cno = tsc.Cno
+where Courses.Cname = 'Mathematics' and Courses.studyear = 2
