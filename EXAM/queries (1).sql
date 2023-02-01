@@ -114,3 +114,52 @@ FROM Students
 inner join tsc on tsc.Sno = Students.Sno
 inner join Courses on Courses.Cno = tsc.Cno
 where Courses.Cname = 'Mathematics' and Courses.studyear = 2
+
+--18
+CREATE VIEW ALLDATA AS
+TSC.SNO, TSC.TNO, TSC.CNO, TSC.HOURS, TSC.GRADE,STUDENTS.SNAME, TEACHERS.TITLE, TEACHERS.TNAME,COURSES.CNAME
+fROM TSC, STUDENTS, TEACHERS, COURSES
+WHERE TSC.SNO = STUDENTS.SNO
+AND TSC.TNO = TEACHERS.TNO
+AND TSC.CNO = COURSES.CNO
+
+--19
+SELECT city, Count(*)
+FROM(
+  SELECT CITY 
+  FROM TEACHERS UNION ALL
+  SELECT CITY FROM STUDENTS
+)
+as abc
+group by city
+
+--20
+SELECT TOP 1 Teachers.tno, AVG(TSC.grade)
+FROM Teachers, TSC
+Where Teachers.Tno = TSC.Tno
+group by Teachers.tno
+ORDER By  AVG(TSC.grade) ASC
+
+--21
+CREATE TABLE archive
+(
+  TNO CHAR(3) NOT null,
+  SNO CHAR(3) NOT null,
+  CNO CHAR(3) NOT null,
+  Sname varchar(50),
+  Tname varchar(50),
+  Cname varchar(50),
+  Grade float,
+  PRIMARY KEY(Tno, Sno, Cno)
+)
+
+insert into archive
+SELECT Teachers.Tno, Students.Sno, Courses.cno, Students.Sname, Teachers.Tname, Courses.Cname, tsc.grade
+FROM Teachers, Students, Courses, tsc
+WHERE Teachers.tno = tsc.tno
+and Students.sno = tsc.sno
+and Courses.Cno = Tsc.Cno
+
+DELETE TSC
+
+SELECT * FROM archive
