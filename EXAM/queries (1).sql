@@ -163,3 +163,13 @@ and Courses.Cno = Tsc.Cno
 DELETE TSC
 
 SELECT * FROM archive
+
+--22
+CREATE VIEW tempp as(
+SELECT Courses.Cname, AVG(TSC.Grade) as av
+FROM Courses, TSC
+WHERE Courses.Cno = TSC.cno
+group by Courses.cname)
+
+SELECT * FROM tempp
+where tempp.av >(SELECT AVG(tempp.av) FROM tempp)
